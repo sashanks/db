@@ -1,0 +1,240 @@
+C:\Users\Sashank>mongo --port 27999
+MongoDB shell version v4.4.4
+connecting to: mongodb://127.0.0.1:27999/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("2675e0b4-2324-4c65-a34b-d9889b0956ce") }
+MongoDB server version: 4.4.4
+---
+The server generated these startup warnings when booting:
+        2021-03-28T17:07:27.942+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+        2021-03-28T17:07:27.943+05:30: This server is bound to localhost. Remote systems will be unable to connect to this server. Start the server with --bind_ip <address> to specify which IP addresses it should serve responses from, or with --bind_ip_all to bind to all interfaces. If this behavior is desired, start the server with --bind_ip 127.0.0.1 to disable this warning
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> show dbs;
+SimpliLearnDb  0.000GB
+admin          0.000GB
+config         0.000GB
+local          0.000GB
+> use SimpliLearnDb;
+switched to db SimpliLearnDb
+>
+>
+>
+> db.create
+db.createCollection(  db.createRole(        db.createUser(        db.createView(
+> use generalStore;
+switched to db generalStore
+>
+>
+>
+> var bulk = db.items.initializeOrderedBulkOp();
+> bulk.insert( { "_id": 1, "item": "pen", "available": true, "soldQty":200});
+> bulk.insert( { "_id": 2, "item": "pencil", "available": true, "soldQty":400})
+> bulk.insert( { "_id": 3, "item": "books", "available": false, "soldQty":900})
+> bulk.insert( { "_id": 4, "item": "markers", "available": true, "soldQty":500})
+> db.find();
+uncaught exception: TypeError: db.find is not a function :
+@(shell):1:1
+> db.itens.find();
+> bulk.execute();
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 4,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.itens.find();
+> db.items.find();
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+> var bulk = db.items.initializeUnorderedBulkOp();
+> bulk.insert( { "_id": 5, "item": "eraser", "available": true, "soldQty":100})
+> bulk.insert( { "_id": 6, "item": "rular", "available": true, "soldQty":300})
+> bulk.execute()
+BulkWriteResult({
+        "writeErrors" : [ ],
+        "writeConcernErrors" : [ ],
+        "nInserted" : 2,
+        "nUpserted" : 0,
+        "nMatched" : 0,
+        "nModified" : 0,
+        "nRemoved" : 0,
+        "upserted" : [ ]
+})
+> db.items.find()
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+>
+>
+> db.items.find()
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+> db.specification.insert( { "name":  "SRT Traders", "established": "1960", "owner":  "Smith Joe"} )
+WriteResult({ "nInserted" : 1 })
+> show tables;
+items
+specification
+> db.specification.find();
+{ "_id" : ObjectId("60607c61db8a72bef3949006"), "name" : "SRT Traders", "established" : "1960", "owner" : "Smith Joe" }
+>
+>
+> db.items.find()
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+> db.items.find().pretty();
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+> db.items.find({"item":"pen"});
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+> db.items.find({"avilable":{$in:[true,false]}});
+> db.items.find({"available":{$in:[true,false]}});
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+> db.items.find({"soldQty":{$in:[300,200,400]}});
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+> db.items.find({"soldQty":{$lt:900}});
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+> db.items.find({"soldQty":{$le:900}});
+Error: error: {
+        "ok" : 0,
+        "errmsg" : "unknown operator: $le",
+        "code" : 2,
+        "codeName" : "BadValue"
+}
+> db.items.find( {  $or: [{ "soldQty": {$gt: 500}}, {"available": true}]} )
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+>
+> db.items.find( {  $or: [{ "soldQty": {$gt: 500}}, {"available": flase}]} )
+uncaught exception: ReferenceError: flase is not defined :
+@(shell):1:52
+> db.items.find( {  $or: [{ "soldQty": {$gt: 500}}, {"available": false}]} )
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+> db.items.find( {  $and: [{ "soldQty": {$gt: 500}}, {"available": true}]} )
+> db.items.find( {  $and: [{ "soldQty": {$gt: 500}}, {"available": false}]} )
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+> db.items.find( { "available": true, $or: [{ "soldQty": {$gt: 200}}, {"item": "Book"}]})
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+> db.items.find( { "_id": {$not: {$mod: [4,1]}}})
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+> db.items.find( { "_id": {$not: {$mod: [3,1]}}})
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+> db.items.find( { "_id": {$not: {$mod: [3,0]}}})
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+> db.items.find({ "item": /pe/i})
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+> db.items.find()
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 400 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+> db.items.find({ "item": /er/i})
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+> db.items.find({ "item": /era/i})
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+> db.items.find({ "item": /ers/i})
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+> db.items.find({ "item": "pen" })
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 200 }
+> db.items.updateOne({ "item": "pen" }, { $set: {"soldQty": 10000} })
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.items.find({ "item": "pen" })
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 10000 }
+> db.items.find({ "item": "pen" })
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 10000 }
+> db.items.updateOne({ "item": "pencil" }, { $inc: {“soldQty”: 10} })
+uncaught exception: SyntaxError: illegal character :
+@(shell):1:50
+> db.items.updateOne({ "item": "pencil" }, { $inc: {“soldQty”: 10} })
+uncaught exception: SyntaxError: illegal character :
+@(shell):1:50
+> db.items.updateOne({ "item": "pencil" }, { $inc: {"soldQty": 10} })
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.items.find({ "item": "pen" })
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 10000 }
+> db.items.find({ "item": "pencil" })
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 410 }
+> db.items.find({ "item": "pen" })
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 10000 }
+> db.items.updateOne({ "item": "pen" }, { $inc: {"soldQty": 10} })
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+> db.items.find({ "item": "pen" })
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 10010 }
+> db.items.find()
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 10010 }
+{ "_id" : 2, "item" : "pencil", "available" : true, "soldQty" : 410 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+> db.items.remove({ "item": "pencil" })
+WriteResult({ "nRemoved" : 1 })
+>
+>
+> db.items.find()
+{ "_id" : 1, "item" : "pen", "available" : true, "soldQty" : 10010 }
+{ "_id" : 3, "item" : "books", "available" : false, "soldQty" : 900 }
+{ "_id" : 4, "item" : "markers", "available" : true, "soldQty" : 500 }
+{ "_id" : 5, "item" : "eraser", "available" : true, "soldQty" : 100 }
+{ "_id" : 6, "item" : "rular", "available" : true, "soldQty" : 300 }
+>
